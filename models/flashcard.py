@@ -1,43 +1,40 @@
-import json
+import random
+import csv
+from datetime import datetime
 from pathlib import Path
 
-class FlashcardApp:
+class FlashcardGame:
     def __init__(self):
-        self.current_card_index = 0
-        self.cards = []
-        self.card_flipped = False
-        self.load_cards()
+        self.words = [
+            {"word": "Hello", "translation": "Hei"},
+            {"word": "Goodbye", "translation": "Näkemiin"},
+            {"word": "Thank you", "translation": "Kiitos"},
+            {"word": "Please", "translation": "Ole hyvä"},
+            {"word": "Good morning", "translation": "Hyvää huomenta"},
+            {"word": "Yes", "translation": "Kyllä"},
+            {"word": "No", "translation": "Ei"},
+            {"word": "How are you?", "translation": "Mitä kuuluu?"},
+            {"word": "Good evening", "translation": "Hyvää iltaa"},
+            {"word": "Welcome", "translation": "Tervetuloa"}
+        ]
+        self.current_word = random.choice(self.words)
+        self.is_flipped = False
+        self.history_file = "flashcard_history.csv"
+        self._init_history_file()
 
-    def load_cards(self):
-        if not Path("flashcards.json").exists():
-            self.cards = [
-                {"front": "Hello", "back": "Hola", "language": "Spanish"},
-                {"front": "Goodbye", "back": "Adiós", "language": "Spanish"},
-                {"front": "Thank you", "back": "Gracias", "language": "Spanish"}
-            ]
-            self.save_cards()
-        else:
-            with open("flashcards.json", "r", encoding="utf-8") as f:
-                self.cards = json.load(f)
+    def _init_history_file(self):
+        if not Path(self.history_file).exists():
+            with open(self.history_file, 'w', newline='', encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow(['Timestamp', 'English', 'Finnish', 'User Answer', 'Correct'])
 
-    def save_cards(self):
-        with open("flashcards.json", "w", encoding="utf-8") as f:
-            json.dump(self.cards, f, ensure_ascii=False, indent=2)
-
-    def add_card(self, front: str, back: str, language: str):
-        new_card = {"front": front, "back": back, "language": language}
-        self.cards.append(new_card)
-        self.save_cards()
-
-    def get_current_card(self):
-        return self.cards[self.current_card_index]
-
-    def next_card(self):
-        self.card_flipped = False
-        self.current_card_index = (self.current_card_index + 1) % len(self.cards)
-        return self.get_current_card()["front"]
-
-    def previous_card(self):
-        self.card_flipped = False
-        self.current_card_index = (self.current_card_index - 1) % len(self.cards)
-        return self.get_current_card()["front"]
+    def log_attempt(self, user_answer, correct):
+        with open(self.history_file, 'a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                self.current_word["word"],
+                self.current_word["translation"],
+                user_answer,
+                correct
+            ])
