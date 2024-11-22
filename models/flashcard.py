@@ -16,12 +16,16 @@ class Word:
         }
 
     def should_show(self):
+        # If streak is 2 or less, always show
         if self.streak <= 2:
             return True
-        return random.randint(0, self.streak) <= 1
+        # If streak > 2, show with decreasing probability
+        coef = random.randint(0, self.streak)
+        return coef <= 1
 
 class FlashcardGame:
     def __init__(self):
+        self.base_path = Path('/home/webman/fp/kaksilingo')
         self._ensure_data_structure()
         self.words = self._load_words_from_csv()
         if not self.words:
@@ -31,15 +35,14 @@ class FlashcardGame:
         self.current_word = self._select_next_word()
         self.is_flipped = False
         self.finnish_to_english = False
-        self.history_file = "history/flashcard_history.csv"
+        self.history_file = self.base_path / "history/flashcard_history.csv"
         self._init_history_file()
 
     def _ensure_data_structure(self):
-        # Create data directory if it doesn't exist
-        Path('data').mkdir(exist_ok=True)
+        data_dir = self.base_path / 'data'
+        data_dir.mkdir(parents=True, exist_ok=True)
         
-        # Create empty vocabulary.csv with just headers if it doesn't exist
-        vocab_file = Path('data/vocabulary.csv')
+        vocab_file = data_dir / 'vocabulary.csv'
         if not vocab_file.exists():
             with open(vocab_file, 'w', newline='', encoding='utf-8') as file:
                 writer = csv.writer(file)
@@ -47,7 +50,8 @@ class FlashcardGame:
 
     def _load_words_from_csv(self):
         words = []
-        with open('data/vocabulary.csv', 'r', encoding='utf-8') as file:
+        vocab_file = self.base_path / 'data/vocabulary.csv'
+        with open(vocab_file, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 words.append(Word(
@@ -60,21 +64,27 @@ class FlashcardGame:
         return self.current_word.to_dict()
 
     def _select_next_word(self):
+        # Filter words based on streak probability
         eligible_words = [word for word in self.words if word.should_show()]
+        
+        # If no eligible words (all have high streaks), reset all streaks
         if not eligible_words:
             for word in self.words:
                 word.streak = 0
             eligible_words = self.words
+            
         return random.choice(eligible_words)
 
     def update_streak(self, correct):
         if correct:
             self.current_word.streak += 1
         else:
+            # Decrease streak by 1, but don't go below 0
             self.current_word.streak = max(0, self.current_word.streak - 1)
 
     def _init_history_file(self):
-        Path('history').mkdir(exist_ok=True)
+        history_dir = self.base_path / 'history'
+        history_dir.mkdir(parents=True, exist_ok=True)
         
         if not Path(self.history_file).exists():
             with open(self.history_file, 'w', newline='', encoding='utf-8') as file:
