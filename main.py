@@ -16,7 +16,7 @@ def main(page: ft.Page):
     initial_word = game.current_word["english"]
     card_text = ft.Text(
         value=initial_word,  # Show first word immediately
-        size=30,
+        size=40,
         text_align=ft.TextAlign.CENTER,
         weight=ft.FontWeight.BOLD,
     )
