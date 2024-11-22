@@ -1,4 +1,21 @@
 english,finnish
-one,yksi,0
-two,kaksi,0
-three,kolme,0
+time,aika,0
+person,henkilö,0
+year,vuosi, 0
+way,tapa, 0
+day,päivä, 0
+thing,asia, 0
+man,mies, 0
+world,maailma, 0
+life,elämä, 0
+hand,käsi, 0
+part,osa, 0
+child,lapsi, 0
+eye,silmä, 0
+woman,nainen, 0
+place,paikka, 0
+work,työ, 0
+week,viikko, 0
+case,tapaus, 0
+point,kohta, 0
+government,hallitus, 0
