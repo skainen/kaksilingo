@@ -1,74 +1,73 @@
 import flet as ft
-import random
-from models.flashcard import FlashcardApp
-from components.card_display import CardDisplay
-from components.add_card_dialog import AddCardDialog
+from models.flashcard import FlashcardGame
+from components.card import create_card_container, create_input_controls
+from utils.event_handlers import EventHandlers
 
 def main(page: ft.Page):
-    app = FlashcardApp()
-    
-    # Page setup
-    page.title = "Language Learning Flashcards"
-    page.theme_mode = "light"
-    page.window_width = 600
-    page.window_height = 400
+    page.title = "English-Finnish Flashcards"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.theme_mode = "light"
+    
+    page.window_center()
+    #page.window.set_window_size(500, 600)
 
-    def flip_card(e):
-        app.card_flipped = not app.card_flipped
-        current_card = app.get_current_card()
-        card_display.text = current_card["back"] if app.card_flipped else current_card["front"]
-        page.update()
+    game = FlashcardGame()
 
-    def next_card(e):
-        card_display.text = app.next_card()
-        page.update()
+    # Create UI components
+    card_text = ft.Text(
+        value="Click to start",
+        size=30,
+        text_align=ft.TextAlign.CENTER,
+        weight=ft.FontWeight.BOLD,
+    )
 
-    def previous_card(e):
-        card_display.text = app.previous_card()
-        page.update()
+    card_subtitle = ft.Text(
+        value="English → Finnish",
+        size=16,
+        color=ft.colors.GREY_700,
+        text_align=ft.TextAlign.CENTER,
+    )
 
-    def shuffle_cards(e):
-        random.shuffle(app.cards)
-        app.current_card_index = 0
-        app.card_flipped = False
-        card_display.text = app.cards[0]["front"]
-        page.update()
+    result_text = ft.Text(
+        value="",
+        size=16,
+        text_align=ft.TextAlign.CENTER,
+        visible=False,
+    )
 
-    def save_new_card(front, back, language):
-        app.add_card(front, back, language)
+    # Create card container and input controls
+    card_container = create_card_container(card_subtitle, card_text)
+    guess_input, submit_btn, next_btn = create_input_controls()
 
-    # Initialize components
-    card_display = CardDisplay(app.cards[0]["front"], flip_card)
-    add_dialog = AddCardDialog(save_new_card)
+    # Initialize event handlers
+    handlers = EventHandlers(
+        game, card_container, card_text, guess_input,
+        submit_btn, next_btn, result_text, page
+    )
 
-    def open_add_dialog(e):
-        page.dialog = add_dialog.build()
-        page.dialog.open = True
-        page.update()
+    # Connect event handlers
+    card_container.on_click = handlers.show_word
+    submit_btn.on_click = handlers.check_answer
+    next_btn.on_click = handlers.next_word
 
-    # Main layout
+    # Add everything to the page
     page.add(
         ft.Column(
             [
-                card_display,
-                ft.Row(
+                card_container,
+                result_text,
+                ft.Column(
                     [
-                        ft.ElevatedButton("Previous", on_click=previous_card),
-                        ft.ElevatedButton("Flip", on_click=flip_card),
-                        ft.ElevatedButton("Next", on_click=next_card),
+                        guess_input,
+                        submit_btn,
+                        next_btn,
                     ],
-                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    spacing=20,
                 ),
-                ft.Row(
-                    [
-                        ft.ElevatedButton("Shuffle", on_click=shuffle_cards),
-                        ft.ElevatedButton("Add Card", on_click=open_add_dialog),
-                    ],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                )
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            spacing=30,
         )
     )
 
