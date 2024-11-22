@@ -14,33 +14,25 @@ def main(page: ft.Page):
     page.window_height = 400
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-    # Card text control
-    card_text = ft.Text(
-        value=app.cards[0]["front"],
-        size=30,
-        weight=ft.FontWeight.BOLD,
-        text_align=ft.TextAlign.CENTER
-    )
-
     def flip_card(e):
         app.card_flipped = not app.card_flipped
         current_card = app.get_current_card()
-        card_text.value = current_card["back"] if app.card_flipped else current_card["front"]
+        card_display.text = current_card["back"] if app.card_flipped else current_card["front"]
         page.update()
 
     def next_card(e):
-        card_text.value = app.next_card()
+        card_display.text = app.next_card()
         page.update()
 
     def previous_card(e):
-        card_text.value = app.previous_card()
+        card_display.text = app.previous_card()
         page.update()
 
     def shuffle_cards(e):
         random.shuffle(app.cards)
         app.current_card_index = 0
         app.card_flipped = False
-        card_text.value = app.cards[0]["front"]
+        card_display.text = app.cards[0]["front"]
         page.update()
 
     def save_new_card(front, back, language):
