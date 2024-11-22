@@ -1,9 +1,9 @@
-# A kaksilingo Flet app
+# Kaksilingo
 
-An example of a minimal Flet app.
+English-Finnish Language Flashcards
 
 To run the app:
 
 ```
-flet run [app_directory]
+flet run kaksilingo
 ```
