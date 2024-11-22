@@ -16,7 +16,7 @@ def create_card_content(direction_text, card_text, show_front, on_click=None):
         width=400,
         height=200,
         bgcolor=ft.colors.WHITE,
-        on_click=on_click,  # Add click handler here
+        on_click=on_click,
     )
 
 def create_card_container(direction_text, card_text, on_click):
@@ -30,6 +30,7 @@ def create_card_container(direction_text, card_text, on_click):
     )
 
 def create_input_controls():
+    # Create all controls first
     guess_input = ft.TextField(
         width=300,
         visible=False,
@@ -53,4 +54,5 @@ def create_input_controls():
         width=300,
     )
 
+    # Return all four controls
     return guess_input, submit_btn, next_btn, switch_btn
