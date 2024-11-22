@@ -1,0 +1,27 @@
+Timestamp,Question Language,Asked Word,Correct Translations,User Answer,Correct,Streak
+2024-11-22 14:17:54,English,three,kolme,kolme,True,1
+2024-11-22 14:18:01,English,three,kolme,kolme,True,2
+2024-11-22 14:18:05,English,three,kolme,kolme,True,3
+2024-11-22 14:18:09,English,two,kaksi,kaksi,True,1
+2024-11-22 14:18:13,English,two,kaksi,kaksi,True,2
+2024-11-22 14:18:15,English,one,yksi,yksi,True,1
+2024-11-22 14:18:18,English,one,yksi,yksi,True,2
+2024-11-22 14:18:22,English,three,kolme,kolme,True,4
+2024-11-22 14:18:25,English,two,kaksi,kaksi,True,3
+2024-11-22 14:18:28,English,one,yksi,yksi,True,3
+2024-11-22 14:18:32,English,three,kolme,kolme,True,5
+2024-11-22 14:21:28,English,three,kolme,kolme,True,1
+2024-11-22 14:21:32,English,three,kolme,kolme,True,2
+2024-11-22 14:21:36,English,one,yksi,yksi,True,1
+2024-11-22 14:21:39,English,two,kaksi,kaksi,True,1
+2024-11-22 14:21:42,English,one,yksi,yksi,True,2
+2024-11-22 14:21:43,English,two,kaksi,kaksi,True,2
+2024-11-22 14:21:47,English,three,kolme,kolme,True,3
+2024-11-22 14:21:50,English,one,yksi,yksi,True,3
+2024-11-22 14:21:53,English,two,kaksi,kaksi,True,3
+2024-11-22 14:21:56,English,one,yksi,yksi,True,4
+2024-11-22 14:21:59,English,three,kolme,kolme,True,4
+2024-11-22 14:22:03,English,one,yksi,yksi,True,5
+2024-11-22 14:22:06,English,one,yksi,yksi,True,6
+2024-11-22 14:22:11,English,two,kaksi,kaksi,True,4
+2024-11-22 14:22:14,English,two,kaksi,kaksi,True,5
