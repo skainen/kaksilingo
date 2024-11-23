@@ -16,5 +16,5 @@ You can of course use whatever languages you want.
 
 # Ideas for extending the app
 - Using sentences instead of single words.
-- Button for text to speech for learning pronounciation.
+- Text to speech for learning pronounciation.
 - Better logic for when user has learnt a word and it isn't asked for again.
