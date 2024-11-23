@@ -5,6 +5,8 @@ Flet application created during a hackathon day as part of a UI Programming cour
 To run the app:
 
 ```
+pip install flet
+git clone https://github.com/skainen/kaksilingo
 flet run kaksilingo
 ```
 
