@@ -17,4 +17,4 @@ You can of course use whatever languages you want.
 # Ideas for extending the app
 - Using sentences instead of single words.
 - Text to speech for learning pronounciation.
-- Better logic for when user has learnt a word and it isn't asked for again.
+- Better logic for frequency of asked words. (Now it's just the streak of 2 correct answers)
