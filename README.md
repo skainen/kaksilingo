@@ -8,5 +8,5 @@ To run the app:
 flet run kaksilingo
 ```
 
-To extend for specific use, you can add words to data/vocabulary.csv in form: <nglish word,finnish word,0
+To extend for specific use, you can add words to data/vocabulary.csv in form: english word,finnish word,0
 0 is for the streak of correct answers on a word, when streak is 2, that word won't be asked again.
