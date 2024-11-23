@@ -11,3 +11,8 @@ flet run kaksilingo
 To extend for specific use, you can add words to data/vocabulary.csv in form: english word,finnish word,0
 
 0 is for the streak of correct answers on a word. When streak is 2, that word won't be asked again.
+
+# Ideas for extending the app
+- Using sentences instead of single words.
+- Button for text to speech for learning pronounciation.
+- Better logic for when user has learnt a word and it isn't asked for again.
