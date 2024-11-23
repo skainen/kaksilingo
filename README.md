@@ -1,6 +1,6 @@
 # Kaksilingo
 
-Flet application created during a hackathon day as part of a UI Programming course at Savonia University of Applied Sciences. The app's purpose is to help users learn Finnish vocabulary using English flashcards.
+Flet application created during a hackathon day as part of a UI Programming course at Savonia University of Applied Sciences. The app's purpose is to help users learn Finnish vocabulary in English using flashcards.
 
 To run the app:
 
